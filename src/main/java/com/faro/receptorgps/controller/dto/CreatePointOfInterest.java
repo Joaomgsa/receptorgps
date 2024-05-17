@@ -1,2 +1,4 @@
-package com.faro.receptorgps.controller.dto;public record CreatePointOfInterest() {
+package com.faro.receptorgps.controller.dto;
+
+public record CreatePointOfInterest(String name, Long x, Long y) {
 }
