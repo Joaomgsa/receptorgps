@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PointOfInterestController {
 
@@ -24,7 +26,7 @@ public class PointOfInterestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/points-of-interest")
+    @GetMapping(value = "/points-of-interest")
     public ResponseEntity<Page<PointOfInterest>> listPoi(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                                          @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
 
@@ -32,4 +34,20 @@ public class PointOfInterestController {
 
         return ResponseEntity.ok(body);
     }
+
+    @GetMapping(value = "/near-me")
+    public ResponseEntity<List<PointOfInterest>> listPoi(@RequestParam("x") Long x,
+                                                         @RequestParam("y") Long y,
+                                                         @RequestParam("dMax") Long dMax) {
+
+        var xMin = x - dMax;
+        var xMax = x + dMax;
+        var yMin = y - dMax;
+        var yMax = y + dMax;
+
+        var body = repository.findNearMe(xMin, xMax, yMin, yMax);
+
+        return ResponseEntity.ok(body);
+    }
 }
+
