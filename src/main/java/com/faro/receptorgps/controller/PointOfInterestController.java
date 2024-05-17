@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static java.util.Arrays.stream;
+
 @RestController
 public class PointOfInterestController {
 
@@ -45,9 +47,16 @@ public class PointOfInterestController {
         var yMin = y - dMax;
         var yMax = y + dMax;
 
-        var body = repository.findNearMe(xMin, xMax, yMin, yMax);
+        var body = repository.findNearMe(xMin, xMax, yMin, yMax)
+                                .stream()
+                                .filter(p -> distanceBetweenPoints(x, y, p.getX(), p.getY()) <= dMax)
+                                .toList();
 
         return ResponseEntity.ok(body);
+    }
+
+    private Double distanceBetweenPoints(Long x1, Long y1, Long x2, Long y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 }
 
