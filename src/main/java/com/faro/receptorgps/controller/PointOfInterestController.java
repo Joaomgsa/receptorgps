@@ -3,6 +3,8 @@ package com.faro.receptorgps.controller;
 import com.faro.receptorgps.controller.dto.CreatePointOfInterest;
 import com.faro.receptorgps.entity.PointOfInterest;
 import com.faro.receptorgps.repository.PointOfInterestRepository;
+import com.faro.receptorgps.service.PointOfInterestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ import static java.util.Arrays.stream;
 
 @RestController
 public class PointOfInterestController {
+
+    @Autowired
+    private PointOfInterestService service;
 
     private final PointOfInterestRepository repository;
 

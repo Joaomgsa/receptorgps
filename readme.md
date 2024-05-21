@@ -41,3 +41,9 @@ retornar os seguintes POIs:
 
 1. Escrever uma consulta recebendo os parâmetros de entrada (x, y, d-max) e retornando os POIs que estão a uma distância
    menor ou igual a d-max a partir do ponto de referência.
+
+
+## Ambiente - Desenvolvimento
+
+1. Testes iniciais usarão o banco H2 e o servidor Tomcat embarcado.
+2. O Ambiente de Homologação usará o banco de dados PostgreSQL
